@@ -1,0 +1,156 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+#
+# CodeRabbit config — auto-review of UDC Workshop 3 homework PRs.
+# Workshop: "Огляд та порівняння AI-інструментів розробки" (tools comparison).
+# Place this file in the ROOT of the practice repo.
+
+language: "uk-UA"
+tone_instructions: >
+  Ментор воркшопу UDC. Відповідай українською, доброзичливо але вимогливо.
+  Що пропущено — поясни що і чому. Статуси: ✅ зроблено, ⚠️ частково, ❌ пропущено.
+
+early_access: false
+
+reviews:
+  profile: "assertive"
+  request_changes_workflow: false
+  high_level_summary: true
+  high_level_summary_placeholder: "@coderabbitai summary"
+  poem: false
+  review_status: true
+  collapse_walkthrough: false
+  changed_files_summary: true
+  sequence_diagrams: false
+
+  auto_review:
+    enabled: true
+    drafts: true
+    auto_incremental_review: true
+    auto_pause_after_reviewed_commits: 0
+    base_branches:
+      - ".*"
+    ignore_title_keywords:
+      - "WIP"
+      - "[skip review]"
+    ignore_usernames:
+      - "dependabot[bot]"
+      - "renovate[bot]"
+      - "github-actions[bot]"
+
+  # ── File filters ──────────────────────────────────────────────
+  path_filters:
+    - "docs/**"
+    - "app/AGENTS.md"
+    - "AGENTS.md"
+    - "app/src/**"
+    - "!**/node_modules/**"
+    - "!**/dist/**"
+    - "!**/build/**"
+    - "!**/coverage/**"
+    - "!*.lock"
+    - "!**/package-lock.json"
+    - "!**/yarn.lock"
+    - "!**/*.min.js"
+    - "!**/*.min.css"
+
+  # ── Path-specific review instructions ─────────────────────────
+  path_instructions:
+    - path: "docs/tool-matrix.md"
+      instructions: |
+        Task A — матриця можливостей. Перевір: заповнена для 2-3 інструментів
+        (не порожні плейсхолдери <…>), охоплює всі рядки-критерії (модель,
+        автономність, індексація, rules/commands/skills/MCP, ціна, enterprise,
+        приватність), є конкретика (не "добре"/"погано"), є висновок.
+
+    - path: "docs/comparison.md"
+      instructions: |
+        Task B — порівняння на тій самій задачі (materials/task-bug-fix.md) у
+        2+ інструментах. Перевір: заповнена таблиця для кожного інструмента
+        (час, ітерації, якість, нотатки), є висновок. Без реальних чисел/деталей
+        — ⚠️/❌.
+
+    - path: "docs/agents-md-notes.md"
+      instructions: |
+        Task C — крос-tool AGENTS.md. Перевір: описано, що змінено в
+        app/AGENTS.md, наведено промпт верифікації і результат у 2+
+        інструментах (не 1), є висновок. Перевір також, що app/AGENTS.md у
+        дифі дійсно виглядає узагальненим (стек/команди/конвенції/guardrails),
+        а не залишився прив'язаним лише до одного інструменту.
+
+    - path: "app/AGENTS.md"
+      instructions: |
+        Task C — ціль узагальнення. Перевір: файл більше не прив'язаний лише
+        до одного інструменту (без формулювань на кшталт "Cursor Rules" як
+        заголовка), містить стек, команди (build/test/lint), 3-5 конвенцій,
+        guardrails.
+
+    - path: "docs/recommendation.md"
+      instructions: |
+        Task D — рекомендація для команди. Перевір: є обґрунтований primary
+        та secondary інструмент, що спирається на дані з Task A/B (не голослівно),
+        перелічені trade-offs, зазначено ризик/застереження.
+
+    - path: "docs/cli-ticket-to-pr.md"
+      instructions: |
+        Task E (bonus) — CLI ticket-to-PR. Перевір: вказано CLI-інструмент,
+        команду, що реалізовано, посилання на PR/diff, спостереження CLI vs
+        IDE. Необов'язкове; відсутність не помилка.
+
+    - path: "app/src/**"
+      instructions: |
+        Якщо truncate() виправлено — перевір, що фікс коректно враховує
+        довжину suffix у межах maxLength (результат ніколи не довший за
+        maxLength), сигнатура функції не змінена, і є регресійний тест на
+        сценарій із materials/task-bug-fix.md.
+
+  # ── Pre-merge checks (grading) ────────────────────────────────
+  pre_merge_checks:
+    title:
+      mode: "warning"
+      requirements: >
+        PR title should follow: "WS3: <participant-name>".
+
+    description:
+      mode: "warning"
+
+    custom_checks:
+      - mode: "warning"
+        name: "Task A — tool capability matrix"
+        instructions: >
+          Check docs/tool-matrix.md is filled (no <…> placeholders left) for
+          2-3 tools across all listed criteria, with a conclusion. PASS if
+          concrete and complete; FAIL if mostly placeholders or missing.
+
+      - mode: "warning"
+        name: "Task B — same-task comparison"
+        instructions: >
+          Check docs/comparison.md compares >=2 tools on the SAME ticket
+          (materials/task-bug-fix.md) with concrete time/iterations/quality
+          data and a conclusion, AND app/src/text-utils.ts's truncate() bug
+          is actually fixed with npm test passing. PASS if both present;
+          FAIL if either is missing or generic.
+
+      - mode: "warning"
+        name: "Task C — cross-tool AGENTS.md"
+        instructions: >
+          Check app/AGENTS.md was generalized beyond a single tool's
+          conventions, and docs/agents-md-notes.md documents verification in
+          >=2 tools with a concrete prompt and result. PASS if both present;
+          FAIL if app/AGENTS.md is unchanged or notes show only 1 tool.
+
+      - mode: "warning"
+        name: "Task D — team recommendation"
+        instructions: >
+          Check docs/recommendation.md gives a justified primary + secondary
+          tool choice grounded in Tasks A/B data, lists trade-offs, and names
+          a risk. PASS if present and concrete; FAIL if missing or generic.
+
+      - mode: "warning"
+        name: "Task E — CLI ticket-to-PR (bonus)"
+        instructions: >
+          Optional. If docs/cli-ticket-to-pr.md exists, check it names a CLI
+          tool, the command run, what was implemented, and a PR/diff
+          reference. Absence is NOT a failure.
+
+chat:
+  auto_reply: true
