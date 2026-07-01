@@ -31,3 +31,6 @@ yarn-error.log*
 
 # Windows Git Bash safety: prevent accidental NUL device files
 nul
+
+# Local agent worktrees (git worktree metadata, not project content)
+.claude/
