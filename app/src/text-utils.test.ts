@@ -31,4 +31,16 @@ describe("truncate", () => {
     expect(result.length).toBeLessThan("hello world".length);
     expect(result.endsWith("...")).toBe(true);
   });
+
+  it("respects maxLength limit including suffix (regression for BUG-101)", () => {
+    const result = truncate("a long sentence here", 10, "...");
+    expect(result).toBe("a long ...");
+    expect(result.length).toBe(10);
+  });
+
+  it("handles edge case where suffix is longer than or equal to maxLength", () => {
+    const result = truncate("hello world", 3, "...");
+    expect(result.length).toBeLessThanOrEqual(3);
+    expect(result).toBe("...");
+  });
 });
