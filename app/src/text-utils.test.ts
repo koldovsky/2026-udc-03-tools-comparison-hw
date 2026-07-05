@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { parseTags, slugify, truncate } from "./text-utils.js";
+import { parseTags, slugify, truncate, capitalizeWords } from "./text-utils.js";
 
 describe("slugify", () => {
   it("lowercases and hyphenates a plain title", () => {
@@ -53,5 +53,48 @@ describe("truncate", () => {
     const result = truncate("hello world", 2, "...");
     expect(result.length).toBeLessThanOrEqual(2);
     expect(result).toBe("..");
+  });
+});
+
+describe("capitalizeWords", () => {
+  it("capitalizes the first letter of each word and lowercases the rest", () => {
+    expect(capitalizeWords("WIRELESS mouse")).toBe("Wireless Mouse");
+  });
+
+  it("preserves multiple spaces between words exactly", () => {
+    expect(capitalizeWords("red   t-shirt")).toBe("Red   T-shirt");
+  });
+
+  it("preserves leading and trailing spaces", () => {
+    expect(capitalizeWords("  hello world  ")).toBe("  Hello World  ");
+  });
+
+  it("returns empty string unchanged", () => {
+    expect(capitalizeWords("")).toBe("");
+  });
+
+  it("preserves already capitalized Title Case string", () => {
+    expect(capitalizeWords("already Title Case")).toBe("Already Title Case");
+  });
+
+  it("preserves space-only strings unchanged", () => {
+    expect(capitalizeWords("   ")).toBe("   ");
+  });
+
+  it("handles punctuation prefixes on words correctly", () => {
+    expect(capitalizeWords("(hello) world!")).toBe("(Hello) World!");
+  });
+
+  it("capitalizes non-English Unicode characters", () => {
+    expect(capitalizeWords("яблоко груша")).toBe("Яблоко Груша");
+    expect(capitalizeWords("élan café")).toBe("Élan Café");
+  });
+
+  it("preserves emojis and handles surrogate pairs correctly", () => {
+    expect(capitalizeWords("👋 hello 🌍")).toBe("👋 Hello 🌍");
+  });
+
+  it("handles alphanumeric words correctly", () => {
+    expect(capitalizeWords("123hello world123")).toBe("123Hello World123");
   });
 });
