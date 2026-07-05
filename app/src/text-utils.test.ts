@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { parseTags, slugify, truncate } from "./text-utils.js";
+import { parseTags, slugify, truncate, wordCount } from "./text-utils.js";
 
 describe("slugify", () => {
   it("lowercases and hyphenates a plain title", () => {
@@ -21,6 +21,16 @@ describe("parseTags", () => {
   });
 });
 
+describe("wordCount", () => {
+  it("counts words separated by whitespace", () => {
+    expect(wordCount("hello world from tests")).toBe(4);
+  });
+
+  it("returns 0 for blank input", () => {
+    expect(wordCount("   ")).toBe(0);
+  });
+});
+
 describe("truncate", () => {
   it("returns the input unchanged when it is already within maxLength", () => {
     expect(truncate("hello", 10)).toBe("hello");
@@ -30,5 +40,22 @@ describe("truncate", () => {
     const result = truncate("hello world", 5);
     expect(result.length).toBeLessThan("hello world".length);
     expect(result.endsWith("...")).toBe(true);
+  });
+
+  it("BUG-101 regression: counts the suffix within maxLength (materials/task-bug-fix.md)", () => {
+    const input = "a long sentence here";
+    const result = truncate(input, 10, "...");
+    expect(result).toBe("a long ...");
+    expect(result.length).toBe(10);
+  });
+
+  it("handles edge case where suffix.length >= maxLength by returning sliced suffix", () => {
+    expect(truncate("hello world", 2, "...")).toBe("..");
+    expect(truncate("hello world", 3, "...")).toBe("...");
+  });
+
+  it("returns an empty string if maxLength is 0 or negative", () => {
+    expect(truncate("hello world", 0)).toBe("");
+    expect(truncate("hello world", -5)).toBe("");
   });
 });
