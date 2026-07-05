@@ -34,3 +34,12 @@ nul
 
 # Local agent worktrees (git worktree metadata, not project content)
 .claude/
+/_bmad-output/
+/_bmad/
+/.agents/
+/.github/agents/bmad-agent-analyst.agent.md
+/.github/agents/bmad-agent-architect.agent.md
+/.github/agents/bmad-agent-dev.agent.md
+/.github/agents/bmad-agent-pm.agent.md
+/.github/agents/bmad-agent-tech-writer.agent.md
+/.github/agents/bmad-agent-ux-designer.agent.md
