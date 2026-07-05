@@ -31,7 +31,7 @@ Unicode/сурогатні пари через `Array.from`, locale-методи
 
 Гілка: `ws03/hasper16`, коміт **`ca7011c`** — `feat(text-utils): add capitalizeWords function`.
 
-Посилання: <!-- заповниться після `gh pr create` -->
+Посилання: https://github.com/koldovsky/2026-udc-03-tools-comparison-hw/pull/3
 
 Короткий diff-summary: 2 файли, **+71 / −1** — `app/src/text-utils.ts` (+27, реалізація),
 `app/src/text-utils.test.ts` (+45/−1, тести).
@@ -45,6 +45,7 @@ locale). Для контрасту в Task B: IDE-Gemini не міг сам за
 (~10 ітерацій), а IDE-Copilot застосував правку inline і прогнав тести, але не
 комітив автоматично. Висновок: CLI зручний для патерну «тікет → PR» у скриптах/
 CI, але автономний коміт вимагає уважного рев'ю diff перед злиттям.
+
 
 
 
