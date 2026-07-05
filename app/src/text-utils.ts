@@ -47,10 +47,10 @@ export function capitalizeWords(input: string): string {
     const chars = Array.from(word);
     const firstLetterIdx = chars.findIndex((c) => /\p{L}/u.test(c));
     if (firstLetterIdx === -1) {
-      return word.toLocaleLowerCase();
+      return word.toLowerCase();
     }
     return chars
-      .map((c, i) => (i === firstLetterIdx ? c.toLocaleUpperCase() : c.toLocaleLowerCase()))
+      .map((c, i) => (i === firstLetterIdx ? c.toUpperCase() : c.toLowerCase()))
       .join("");
   });
 }
