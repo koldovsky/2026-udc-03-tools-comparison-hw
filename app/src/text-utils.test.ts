@@ -31,4 +31,27 @@ describe("truncate", () => {
     expect(result.length).toBeLessThan("hello world".length);
     expect(result.endsWith("...")).toBe(true);
   });
+
+  it("keeps the final length within maxLength, counting the suffix (BUG-101)", () => {
+    const result = truncate("a long sentence here", 10, "...");
+    expect(result).toBe("a long ...");
+    expect(result.length).toBe(10);
+  });
+
+  it("never returns a string longer than maxLength for any input", () => {
+    const cases: Array<[string, number, string]> = [
+      ["a long sentence here", 10, "..."],
+      ["hello world", 5, "..."],
+      ["abcdefghij", 4, ".."],
+    ];
+    for (const [input, maxLength, suffix] of cases) {
+      expect(truncate(input, maxLength, suffix).length).toBeLessThanOrEqual(maxLength);
+    }
+  });
+
+  it("returns the suffix clipped to maxLength when suffix.length >= maxLength", () => {
+    const result = truncate("hello world", 2, "...");
+    expect(result.length).toBeLessThanOrEqual(2);
+    expect(result).toBe("..");
+  });
 });

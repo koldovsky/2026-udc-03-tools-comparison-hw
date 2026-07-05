@@ -13,7 +13,12 @@ export function truncate(input: string, maxLength: number, suffix = "..."): stri
     return input;
   }
 
-  return input.slice(0, maxLength) + suffix;
+  // maxLength is a hard cap for the final string, suffix included.
+  if (suffix.length >= maxLength) {
+    return suffix.slice(0, maxLength);
+  }
+
+  return input.slice(0, maxLength - suffix.length) + suffix;
 }
 
 export function parseTags(input: string): string[] {
