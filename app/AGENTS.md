@@ -204,7 +204,7 @@ That's it. Keep it simple.
 
 Copy-paste prompt skeleton for tools that expect a structured task description:
 
-```
+```text
 Task: <one-line task summary>
 Files: edit only these files: <paths>
 Goal: <what must be achieved; include tests to add or failing test to fix>
