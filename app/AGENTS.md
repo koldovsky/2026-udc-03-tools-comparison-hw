@@ -60,5 +60,4 @@ Run from the `app/` directory:
 
 ## How to verify
 
-Before finishing a change: `npm test` is green and `npm run typecheck` reports
-no errors.
+Before finishing a change: `npm test` is green and `npm run typecheck` reports no errors.
