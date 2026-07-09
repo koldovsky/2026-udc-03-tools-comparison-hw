@@ -9,7 +9,7 @@ Claude Code (CLI, модель Opus 4.8).
 ## Команда, яку запустили
 
 ```
-claude -p "implement the ticket in materials/task-feature-ticket.md"
+read @materials\task-feature-ticket.md and make it please with test
 ```
 
 (У цій сесії тікет було передано агенту як єдиний вхід — він сам прочитав
@@ -31,7 +31,7 @@ claude -p "implement the ticket in materials/task-feature-ticket.md"
 
 Гілка: `ws03/hod-i`
 
-Посилання: _<додати URL після `git push` + `gh pr create`>_
+Посилання: https://github.com/hod-i/2026-udc-03-tools-comparison-hw/commit/f72c56acce7ab5477891e6c3099d642488d4f530
 
 Короткий diff-summary:
 - `app/src/text-utils.ts` — +14 рядків (нова функція `capitalizeWords`)
