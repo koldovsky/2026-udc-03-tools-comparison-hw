@@ -166,13 +166,13 @@ cd app && npm install && npm test && cd ..
 
 ## Definition of Done
 
-- [X] **Task A:** `docs/tool-matrix.md` заповнений для всіх обраних інструментів
-- [X] **Task B:** `docs/comparison.md` — та сама задача в 2+ інструментах
-- [X] **Task C:** `app/AGENTS.md` узагальнений + `docs/agents-md-notes.md` з перевіркою в 2+ інструментах
-- [X] **Task D:** `docs/recommendation.md` — primary/secondary + trade-offs
-- [X] **Task E (bonus):** `docs/cli-ticket-to-pr.md` (опціонально)
-- [X] Жодних реальних секретів/PII у PR
-- [X] `cd app && npm test` зелений
+- [ ] **Task A:** `docs/tool-matrix.md` заповнений для всіх обраних інструментів
+- [ ] **Task B:** `docs/comparison.md` — та сама задача в 2+ інструментах
+- [ ] **Task C:** `app/AGENTS.md` узагальнений + `docs/agents-md-notes.md` з перевіркою в 2+ інструментах
+- [ ] **Task D:** `docs/recommendation.md` — primary/secondary + trade-offs
+- [ ] **Task E (bonus):** `docs/cli-ticket-to-pr.md` (опціонально)
+- [ ] Жодних реальних секретів/PII у PR
+- [ ] `cd app && npm test` зелений
 
 ## Здача
 
