@@ -5,6 +5,7 @@
   "type": "module",
   "description": "Tiny TS sample — common task base for the WS3 tool comparison exercise.",
   "scripts": {
+    "pretest": "node -e \"require('fs').existsSync('node_modules/vitest')||require('child_process').execSync('npm install',{stdio:'inherit'})\"",
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit"

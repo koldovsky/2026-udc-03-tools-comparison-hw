@@ -8,13 +8,19 @@ Claude Code (CLI, модель Opus 4.8).
 
 ## Команда, яку запустили
 
-```
-read @materials\task-feature-ticket.md and make it please with test
+Відтворюваний CLI-виклик (headless, тікет як єдиний вхід):
+
+```bash
+cd 2026-udc-03-tools-comparison-hw
+claude -p "implement the ticket in materials/task-feature-ticket.md, add tests"
 ```
 
-(У цій сесії тікет було передано агенту як єдиний вхід — він сам прочитав
-`materials/task-feature-ticket.md`, наявний код і тести, після чого написав
-реалізацію та unit-тести.)
+Фактичний промпт, який був набраний у цій інтерактивній сесії Claude Code
+(еквівалент виклику вище — агент сам прочитав тікет, наявний код і тести):
+
+```text
+read @materials\task-feature-ticket.md and make it please with test
+```
 
 ## Що реалізовано
 

@@ -69,4 +69,12 @@ describe("capitalizeWords", () => {
   it("normalizes an already Title Case string", () => {
     expect(capitalizeWords("already Title Case")).toBe("Already Title Case");
   });
+
+  it("capitalizes a single character", () => {
+    expect(capitalizeWords("a")).toBe("A");
+  });
+
+  it("capitalizes a single word without spaces", () => {
+    expect(capitalizeWords("HELLO")).toBe("Hello");
+  });
 });
