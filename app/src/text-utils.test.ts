@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { parseTags, slugify, truncate } from "./text-utils.js";
+import { capitalizeWords, parseTags, slugify, truncate } from "./text-utils.js";
 
 describe("slugify", () => {
   it("lowercases and hyphenates a plain title", () => {
@@ -30,5 +30,51 @@ describe("truncate", () => {
     const result = truncate("hello world", 5);
     expect(result.length).toBeLessThan("hello world".length);
     expect(result.endsWith("...")).toBe(true);
+  });
+
+  it("keeps the result within maxLength, counting the suffix (BUG-101)", () => {
+    const result = truncate("a long sentence here", 10, "...");
+    expect(result.length).toBe(10);
+    expect(result).toBe("a long ...");
+  });
+
+  it("returns the suffix trimmed to maxLength when suffix is at least maxLength", () => {
+    const result = truncate("a long sentence here", 2, "...");
+    expect(result.length).toBe(2);
+    expect(result).toBe("..");
+  });
+});
+
+describe("capitalizeWords", () => {
+  it("uppercases the first letter of each word and lowercases the rest", () => {
+    expect(capitalizeWords("WIRELESS mouse")).toBe("Wireless Mouse");
+  });
+
+  it("preserves multiple spaces between words without collapsing them", () => {
+    expect(capitalizeWords("red   t-shirt")).toBe("Red   T-shirt");
+  });
+
+  it("preserves leading and trailing whitespace", () => {
+    expect(capitalizeWords("  hello world  ")).toBe("  Hello World  ");
+  });
+
+  it("returns an empty string unchanged", () => {
+    expect(capitalizeWords("")).toBe("");
+  });
+
+  it("returns a whitespace-only string unchanged", () => {
+    expect(capitalizeWords("   ")).toBe("   ");
+  });
+
+  it("normalizes an already Title Case string", () => {
+    expect(capitalizeWords("already Title Case")).toBe("Already Title Case");
+  });
+
+  it("capitalizes a single character", () => {
+    expect(capitalizeWords("a")).toBe("A");
+  });
+
+  it("capitalizes a single word without spaces", () => {
+    expect(capitalizeWords("HELLO")).toBe("Hello");
   });
 });
