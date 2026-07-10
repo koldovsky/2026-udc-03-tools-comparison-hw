@@ -13,7 +13,8 @@ export function truncate(input: string, maxLength: number, suffix = "..."): stri
     return input;
   }
 
-  return input.slice(0, maxLength) + suffix;
+  const cutAt = Math.max(0, maxLength - suffix.length);
+  return input.slice(0, cutAt) + suffix.slice(0, maxLength);
 }
 
 export function parseTags(input: string): string[] {
