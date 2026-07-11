@@ -13,6 +13,10 @@ export function truncate(input: string, maxLength: number, suffix = "..."): stri
     return input;
   }
 
+  if (maxLength <= 0) {
+    return "";
+  }
+
   if (suffix.length >= maxLength) {
     return suffix.slice(0, maxLength);
   }

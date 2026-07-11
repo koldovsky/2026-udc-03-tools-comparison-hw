@@ -42,4 +42,9 @@ describe("truncate", () => {
     expect(truncate("hello world", 3, "...")).toBe("...");
     expect(truncate("hello world", 2, "...")).toBe("..");
   });
+
+  it("returns an empty string when maxLength is zero or negative", () => {
+    expect(truncate("hello world", 0)).toBe("");
+    expect(truncate("hello world", -1, "...")).toBe("");
+  });
 });

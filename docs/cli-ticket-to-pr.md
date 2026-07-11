@@ -8,10 +8,12 @@ Claude Code (модель Claude Fable 5)
 
 ## Команда, яку запустили
 
-Тікет віддано агенту в інтерактивній сесії Claude Code як єдиний вхід
-(еквівалент headless-варіанта):
+Фактично виконано: тікет віддано агенту в **інтерактивній сесії** Claude
+Code — агент сам прочитав `materials/task-feature-ticket.md` як єдиний вхід.
 
-```
+Еквівалентний headless-варіант тієї самої команди (для CI/автоматизації):
+
+```sh
 claude -p "implement the ticket in materials/task-feature-ticket.md"
 ```
 
