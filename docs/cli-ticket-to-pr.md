@@ -1,5 +1,17 @@
 # Task E (bonus) — Ticket → Code → PR з CLI-агентом
 
+## CLI-агент
+
+**Claude Haiku 4.5**
+
+## Команда, яку запустили
+
+```bash
+claude -p "implement the ticket in materials/task-feature-ticket.md"
+```
+
+---
+
 ## Завдання
 
 Продемонструвати повторюваний паттерн роботи CLI-агента:
