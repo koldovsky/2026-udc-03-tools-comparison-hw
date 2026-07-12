@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { parseTags, slugify, truncate } from "./text-utils.js";
+import { capitalizeWords, parseTags, slugify, truncate } from "./text-utils.js";
 
 describe("slugify", () => {
   it("lowercases and hyphenates a plain title", () => {
@@ -8,6 +8,32 @@ describe("slugify", () => {
 
   it("collapses punctuation and extra spaces into single hyphens", () => {
     expect(slugify("  AI Tools: A Comparison!! ")).toBe("ai-tools-a-comparison");
+  });
+});
+
+describe("capitalizeWords", () => {
+  it("uppercases the first letter of each word and lowercases the rest", () => {
+    expect(capitalizeWords("WIRELESS mouse")).toBe("Wireless Mouse");
+  });
+
+  it("preserves multiple spaces between words without collapsing them", () => {
+    expect(capitalizeWords("red   t-shirt")).toBe("Red   T-shirt");
+  });
+
+  it("preserves leading and trailing spaces", () => {
+    expect(capitalizeWords("  hello world  ")).toBe("  Hello World  ");
+  });
+
+  it("returns an empty string unchanged", () => {
+    expect(capitalizeWords("")).toBe("");
+  });
+
+  it("leaves a whitespace-only string unchanged", () => {
+    expect(capitalizeWords("   ")).toBe("   ");
+  });
+
+  it("leaves already-Title-Case input unchanged", () => {
+    expect(capitalizeWords("already Title Case")).toBe("Already Title Case");
   });
 });
 
@@ -30,5 +56,16 @@ describe("truncate", () => {
     const result = truncate("hello world", 5);
     expect(result.length).toBeLessThan("hello world".length);
     expect(result.endsWith("...")).toBe(true);
+  });
+
+  it("never exceeds maxLength when suffix is appended (BUG-101)", () => {
+    const result = truncate("a long sentence here", 10, "...");
+    expect(result.length).toBeLessThanOrEqual(10);
+    expect(result).toBe("a long ...");
+  });
+
+  it("returns suffix truncated to maxLength when suffix is longer than maxLength", () => {
+    expect(truncate("a long sentence here", 2, "...")).toBe("..");
+    expect(truncate("a long sentence here", 3, "...")).toBe("...");
   });
 });
