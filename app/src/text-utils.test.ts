@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { capitalize, parseTags, slugify, truncate } from "./text-utils.js";
+import { capitalize, capitalizeWords, parseTags, slugify, truncate } from "./text-utils.js";
 
 describe("slugify", () => {
   it("lowercases and hyphenates a plain title", () => {
@@ -59,5 +59,39 @@ describe("capitalize", () => {
 
   it("capitalizes a single character", () => {
     expect(capitalize("a")).toBe("A");
+  });
+});
+
+describe("capitalizeWords", () => {
+  it("capitalizes the first letter of each word", () => {
+    expect(capitalizeWords("WIRELESS mouse")).toBe("Wireless Mouse");
+  });
+
+  it("preserves multiple spaces between words", () => {
+    expect(capitalizeWords("red   t-shirt")).toBe("Red   T-shirt");
+  });
+
+  it("preserves leading and trailing spaces", () => {
+    expect(capitalizeWords("  hello world  ")).toBe("  Hello World  ");
+  });
+
+  it("returns an empty string unchanged", () => {
+    expect(capitalizeWords("")).toBe("");
+  });
+
+  it("returns whitespace-only string unchanged", () => {
+    expect(capitalizeWords("   ")).toBe("   ");
+  });
+
+  it("handles already title-cased input", () => {
+    expect(capitalizeWords("Already Title Case")).toBe("Already Title Case");
+  });
+
+  it("lowercases non-first letters of words", () => {
+    expect(capitalizeWords("hELLO wORLD")).toBe("Hello World");
+  });
+
+  it("handles single word", () => {
+    expect(capitalizeWords("hello")).toBe("Hello");
   });
 });
