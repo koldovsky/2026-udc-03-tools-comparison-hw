@@ -1,12 +1,61 @@
-# Cursor Rules
+# AGENTS.md — `app/`
 
-This is a small TypeScript project. Use TypeScript and keep things simple.
+Контекст для AI-агентів у цьому sample-проєкті (UDC WS3). Файл навмисно
+tool-agnostic: підходить для Cursor, JetBrains AI Chat / ACP, Claude Code тощо.
 
-- Write clean, readable code
-- Follow the existing code style in the file you're editing
-- Prefer functional style where it makes sense
-- Add comments for anything non-obvious
+## Стек
 
-When suggesting changes, explain what you changed and why.
+- **Мова:** TypeScript 5.6, `strict: true`, target ES2022
+- **Модулі:** ESM (`"type": "module"` у `package.json`)
+- **Тести:** Vitest 2.x (`src/**/*.test.ts`)
+- **Збірка:** окремого `build` немає — лише утиліти в `src/`, без bundler/runtime
 
-Don't break existing functionality.
+## Команди
+
+Усі команди запускати з каталогу `app/`:
+
+| Команда | Призначення |
+|---|---|
+| `npm test` | Запуск тестів (Vitest, одноразово) |
+| `npm run test:watch` | Тести в watch-режимі |
+| `npm run typecheck` | Перевірка типів (`tsc --noEmit`) |
+| `npm run build` | **Не налаштовано** — скрипта немає |
+| `npm run lint` | **Не налаштовано** — ESLint/Prettier не підключені |
+
+Перед завершенням змін: `npm test` має бути зеленим; за потреби — `npm run typecheck`.
+
+## Структура
+
+```
+app/
+├── src/
+│   ├── text-utils.ts       # експортовані утиліти (slugify, truncate, parseTags)
+│   └── text-utils.test.ts  # unit-тести поруч із кодом
+├── package.json
+└── tsconfig.json
+```
+
+Нові утиліти додавай у `text-utils.ts` (або окремий файл у `src/`) за тим самим
+зразком: named export, тести в `*.test.ts` поруч.
+
+## Конвенції коду
+
+1. **Функціональний стиль** — чисті функції з явними типами аргументів і повернення; без класів і глобального стану.
+2. **Стиль файлу** — дотримуйся вже наявного коду: подвійні лапки, 2 пробіли відступу, `camelCase` для функцій і змінних.
+3. **Імпорти в тестах** — ESM з суфіксом `.js` у шляху (напр. `from "./text-utils.js"`), навіть якщо вихідний файл `.ts`.
+4. **Тести** — один `describe` на функцію; назви `it(...)` описують поведінку; edge cases і регресії з тікетів покривай окремими тестами.
+5. **Публічний API** — не змінюй сигнатури експортованих функцій (`slugify`, `truncate`, `parseTags` та майбутніх) без явної вимоги в тікеті; змінюй лише реалізацію й тести.
+
+## Guardrails
+
+- Не ламай існуючу поведінку функцій, які вже покриті тестами (окрім навмисного фіксу з тікета).
+- Не додавай залежності без потреби — проєкт мінімальний (лише `typescript` + `vitest`).
+- Не коміть секрети, `.env`, ключі API.
+- Коментарі — лише для неочевидної логіки; код має бути самодокументованим.
+- На Windows у shell-командах не використовуй `2>nul` / `>nul` (створює файл `nul`); краще `2>/dev/null` або PowerShell-еквіваленти.
+
+## Як працювати з задачами
+
+- Баги/фічі приходять як тікети в `materials/` (напр. `task-bug-fix.md`).
+- Читай acceptance criteria в тікеті; додавай регресійні тести на сценарії з тікета.
+- Після правок коротко поясни, що змінено і чому.
