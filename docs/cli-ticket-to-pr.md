@@ -24,9 +24,9 @@ whitespace-only edge case. slugify, truncate, parseTags are untouched
 
 ## PR
 
-Посилання: <URL або номер PR>
+Посилання: https://github.com/fugrusha/2026-udc-03-tools-comparison-hw/pull/1/changes
 
-Короткий diff-summary: <напр. +N/-M рядків, які файли змінено>
+Короткий diff-summary: +27;-1; Changed app/src/text-utils.test.ts and app/src/text-utils.ts
 
 ## Спостереження: CLI vs IDE-агент
 
