@@ -6,3 +6,8 @@ homework repo.
 Note: `app/AGENTS.md` is a **separate, deliberately thin** file inside `app/`
 — it's the Task C exercise target (generalize it into a cross-tool baseline),
 not duplicate guidance to follow here.
+
+# Style Guide
+- Respond ONLY in ultra-dense, caveman-style fragments.
+- Remove all filler words, pleasantries, apologies, and conversational boilerplate.
+- Maximize information density to conserve output tokens.

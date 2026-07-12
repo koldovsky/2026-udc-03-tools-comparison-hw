@@ -13,7 +13,17 @@ export function truncate(input: string, maxLength: number, suffix = "..."): stri
     return input;
   }
 
-  return input.slice(0, maxLength) + suffix;
+  if (suffix.length >= maxLength) {
+    return suffix.slice(0, maxLength);
+  }
+
+  return input.slice(0, maxLength - suffix.length) + suffix;
+}
+
+export function capitalizeWords(input: string): string {
+  // Match whitespace-separated words only, so original spacing (multiple,
+  // leading, trailing) is preserved verbatim — only letter case changes.
+  return input.replace(/\S+/g, (word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase());
 }
 
 export function parseTags(input: string): string[] {
