@@ -43,8 +43,11 @@ describe("truncate", () => {
     expect(truncate("hello world", 2, "...")).toBe("..");
   });
 
-  it("returns an empty string when maxLength is zero or negative", () => {
+  it("returns an empty string when maxLength is zero", () => {
     expect(truncate("hello world", 0)).toBe("");
+  });
+
+  it("returns an empty string when maxLength is negative", () => {
     expect(truncate("hello world", -1, "...")).toBe("");
   });
 });
