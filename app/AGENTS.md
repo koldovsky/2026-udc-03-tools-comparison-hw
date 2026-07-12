@@ -1,12 +1,44 @@
-# Cursor Rules
+# AGENTS.md — інструкції для будь-якого AI-агента
 
-This is a small TypeScript project. Use TypeScript and keep things simple.
+Ці правила стосуються каталогу `app/` і призначені для будь-якого
+AI-інструмента (Claude Code, Codex CLI, Cursor, Copilot тощо), а не для
+конкретної IDE.
 
-- Write clean, readable code
-- Follow the existing code style in the file you're editing
-- Prefer functional style where it makes sense
-- Add comments for anything non-obvious
+## Стек
 
-When suggesting changes, explain what you changed and why.
+- TypeScript 5.6 (strict), ES modules (`"type": "module"`)
+- Тести: Vitest 2.x
+- Node.js 22+
+- Без фреймворків і runtime-залежностей — це маленька бібліотека text-утиліт
+  (`src/text-utils.ts`)
 
-Don't break existing functionality.
+## Команди
+
+Виконувати з каталогу `app/`:
+
+- **build**: окремого build-скрипта немає; перевірка компіляції — `npm run typecheck` (`tsc --noEmit`)
+- **test**: `npm test` (одноразовий прогін), `npm run test:watch` (watch-режим)
+- **lint**: лінтер у проєкті **не налаштований** — не вигадуй команду і не додавай ESLint без окремого запиту
+
+## Конвенції коду
+
+1. Іменовані `export function` для кожної утиліти; без default-експортів і класів.
+2. Функціональний стиль: чисті функції без side effects та без спільного стану.
+3. Явні типи параметрів і результату в сигнатурах публічних функцій.
+4. Імпорти між модулями — з розширенням `.js` (ESM-стиль, як в існуючих тестах).
+5. Коментарі — лише для неочевидних рішень; не дублювати словами те, що видно з коду.
+
+## Тестування
+
+- Кожна нова або змінена функція має мати тести у відповідному файлі
+  `src/<name>.test.ts` (структура: `describe` на функцію, `it` на сценарій).
+- Для баг-фіксів обов'язковий регресійний тест на сценарій із тікета.
+- Перед завершенням задачі `npm test` має бути повністю зеленим.
+
+## Guardrails (обмеження)
+
+- Не змінювати публічні сигнатури існуючих функцій без явного запиту.
+- Не додавати нові залежності (dependencies або devDependencies) без явного запиту.
+- Не чіпати файли поза `app/`, якщо задача цього прямо не вимагає.
+- Не комітити і не пушити зміни самостійно — це робить користувач.
+- Секрети, токени та персональні дані не додавати в код, тести чи документацію.

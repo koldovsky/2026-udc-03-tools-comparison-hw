@@ -31,4 +31,23 @@ describe("truncate", () => {
     expect(result.length).toBeLessThan("hello world".length);
     expect(result.endsWith("...")).toBe(true);
   });
+
+  it("never exceeds maxLength including the suffix (BUG-101 regression)", () => {
+    const result = truncate("a long sentence here", 10, "...");
+    expect(result).toBe("a long ...");
+    expect(result.length).toBeLessThanOrEqual(10);
+  });
+
+  it("returns the suffix sliced to maxLength when suffix.length >= maxLength", () => {
+    expect(truncate("hello world", 3, "...")).toBe("...");
+    expect(truncate("hello world", 2, "...")).toBe("..");
+  });
+
+  it("returns an empty string when maxLength is zero", () => {
+    expect(truncate("hello world", 0)).toBe("");
+  });
+
+  it("returns an empty string when maxLength is negative", () => {
+    expect(truncate("hello world", -1, "...")).toBe("");
+  });
 });
