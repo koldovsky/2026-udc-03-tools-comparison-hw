@@ -13,7 +13,11 @@ export function truncate(input: string, maxLength: number, suffix = "..."): stri
     return input;
   }
 
-  return input.slice(0, maxLength) + suffix;
+  if (suffix.length >= maxLength) {
+    return suffix.slice(0, maxLength);
+  }
+
+  return input.slice(0, maxLength - suffix.length) + suffix;
 }
 
 export function parseTags(input: string): string[] {
@@ -23,4 +27,13 @@ export function parseTags(input: string): string[] {
     .filter((tag) => tag.length > 0);
 
   return Array.from(new Set(tags));
+}
+
+export function capitalizeWords(input: string): string {
+  return input
+    .split(" ")
+    .map((word) =>
+      word.length === 0 ? word : word[0].toUpperCase() + word.slice(1).toLowerCase(),
+    )
+    .join(" ");
 }
