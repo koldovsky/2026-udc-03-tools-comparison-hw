@@ -1,12 +1,25 @@
-# Cursor Rules
+# AGENTS.md — Project Context
 
-This is a small TypeScript project. Use TypeScript and keep things simple.
+**Tech stack:** TypeScript (ESM), Vitest, Node 22+
 
-- Write clean, readable code
-- Follow the existing code style in the file you're editing
-- Prefer functional style where it makes sense
-- Add comments for anything non-obvious
+## Commands
 
-When suggesting changes, explain what you changed and why.
+- **test:** `cd app && npm test` (runs vitest)
+- **typecheck:** `npm run typecheck` (tsc --noEmit)
+- **build:** not configured (no bundler)
+- **lint:** not configured
 
-Don't break existing functionality.
+## Code Conventions
+
+- Write clean, readable code — prefer clarity over brevity
+- Follow existing code style in the file you're editing (see `src/text-utils.ts` as reference)
+- Prefer functional style: no mutations, pure functions where possible
+- Add comments only for non-obvious logic (why, not what)
+- Function naming: descriptive (`truncate`, `parseTags`), not abbreviations
+
+## Guardrails
+
+- **Don't break public signatures** of exported functions (`slugify`, `truncate`, `parseTags`)
+- Don't change behavior of existing, passing tests without explicit requirement
+- Don't commit secrets or `.env` files — they're gitignored
+- When suggesting changes, explain what you changed and why

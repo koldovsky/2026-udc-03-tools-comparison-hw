@@ -41,6 +41,10 @@ Baseline guidance for an Agentic IDE working in **this homework repo**.
   `app/` contain only synthetic, generic sample data on purpose.
 - Don't change the public signature of `slugify`, `truncate`, or `parseTags`
   when fixing the bug — only the implementation and tests.
+- **Language (Ukrainian documentation):** All documentation, comments, and responses
+  in Ukrainian must be free of Russian words and Russicisms. Replace with proper
+  Ukrainian equivalents. Avoid Russian-influenced
+  phrasing; use authentic Ukrainian syntax and vocabulary.
 - **Windows + Git Bash:** never use `2>nul` / `>nul` (creates a literal `nul`
   file). Use `2>/dev/null` / `>/dev/null`. `nul` is gitignored as a net.
 
