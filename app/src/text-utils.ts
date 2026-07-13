@@ -9,6 +9,10 @@ export function slugify(input: string): string {
 }
 
 export function truncate(input: string, maxLength: number, suffix = "..."): string {
+  if (maxLength < 0) {
+    throw new RangeError("maxLength must be non-negative");
+  }
+
   if (input.length <= maxLength) {
     return input;
   }

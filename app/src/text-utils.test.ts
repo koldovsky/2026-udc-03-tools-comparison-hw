@@ -43,4 +43,12 @@ describe("truncate", () => {
     expect(result.length).toBeLessThanOrEqual(2);
     expect(result).toBe("..".slice(0, 2));
   });
+
+  it("returns the full suffix when suffix.length equals maxLength", () => {
+    expect(truncate("a long sentence here", 3, "...")).toBe("...");
+  });
+
+  it("throws RangeError for negative maxLength", () => {
+    expect(() => truncate("hello", -1)).toThrow(RangeError);
+  });
 });
