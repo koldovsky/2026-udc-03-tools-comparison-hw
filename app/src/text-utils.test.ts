@@ -31,4 +31,24 @@ describe("truncate", () => {
     expect(result.length).toBeLessThan("hello world".length);
     expect(result.endsWith("...")).toBe(true);
   });
+
+  it("never returns a string longer than maxLength (BUG-101)", () => {
+    const result = truncate("a long sentence here", 10, "...");
+    expect(result.length).toBeLessThanOrEqual(10);
+    expect(result).toBe("a long ...");
+  });
+
+  it("returns a suffix truncated to maxLength when suffix.length >= maxLength", () => {
+    const result = truncate("a long sentence here", 2, "...");
+    expect(result.length).toBeLessThanOrEqual(2);
+    expect(result).toBe("..".slice(0, 2));
+  });
+
+  it("returns the full suffix when suffix.length equals maxLength", () => {
+    expect(truncate("a long sentence here", 3, "...")).toBe("...");
+  });
+
+  it("throws RangeError for negative maxLength", () => {
+    expect(() => truncate("hello", -1)).toThrow(RangeError);
+  });
 });
