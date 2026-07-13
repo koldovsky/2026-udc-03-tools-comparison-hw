@@ -23,3 +23,4 @@
 - Don't change behavior of existing, passing tests without explicit requirement
 - Don't commit secrets or `.env` files — they're gitignored
 - When suggesting changes, explain what you changed and why
+
