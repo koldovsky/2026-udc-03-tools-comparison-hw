@@ -28,3 +28,12 @@ export function parseTags(input: string): string[] {
 
   return Array.from(new Set(tags));
 }
+
+export function capitalizeWords(input: string): string {
+  return input
+    .split(" ")
+    .map((word) =>
+      word.length === 0 ? word : word[0].toUpperCase() + word.slice(1).toLowerCase(),
+    )
+    .join(" ");
+}
