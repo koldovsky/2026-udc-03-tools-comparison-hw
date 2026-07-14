@@ -1,5 +1,37 @@
 import { describe, expect, it } from "vitest";
-import { parseTags, slugify, truncate } from "./text-utils.js";
+import { capitalizeWords, parseTags, reverseWords, slugify, truncate } from "./text-utils.js";
+
+describe("capitalizeWords", () => {
+  it("capitalizes first letter of each word and lowercases the rest", () => {
+    expect(capitalizeWords("WIRELESS mouse")).toBe("Wireless Mouse");
+  });
+
+  it("preserves multiple spaces between words", () => {
+    expect(capitalizeWords("red   t-shirt")).toBe("Red   T-shirt");
+  });
+
+  it("preserves leading and trailing spaces", () => {
+    expect(capitalizeWords("  hello world  ")).toBe("  Hello World  ");
+  });
+
+  it("returns empty string unchanged", () => {
+    expect(capitalizeWords("")).toBe("");
+  });
+
+  it("handles already Title Case input", () => {
+    expect(capitalizeWords("already Title Case")).toBe("Already Title Case");
+  });
+});
+
+describe("reverseWords", () => {
+  it("reverses the order of words in a sentence", () => {
+    expect(reverseWords("hello world")).toBe("world hello");
+  });
+
+  it("handles extra whitespace", () => {
+    expect(reverseWords("  foo  bar  ")).toBe("bar foo");
+  });
+});
 
 describe("slugify", () => {
   it("lowercases and hyphenates a plain title", () => {
@@ -30,5 +62,18 @@ describe("truncate", () => {
     const result = truncate("hello world", 5);
     expect(result.length).toBeLessThan("hello world".length);
     expect(result.endsWith("...")).toBe(true);
+  });
+
+  it("regression BUG-101: result length never exceeds maxLength", () => {
+    const result = truncate("a long sentence here", 10, "...");
+    expect(result.length).toBeLessThanOrEqual(10);
+  });
+
+  it("regression BUG-101: returns exactly maxLength chars with suffix counted in", () => {
+    expect(truncate("a long sentence here", 10, "...")).toBe("a long ...");
+  });
+
+  it("edge case: suffix length >= maxLength returns suffix sliced to maxLength", () => {
+    expect(truncate("hello world", 2, "...").length).toBeLessThanOrEqual(2);
   });
 });

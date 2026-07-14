@@ -13,7 +13,16 @@ export function truncate(input: string, maxLength: number, suffix = "..."): stri
     return input;
   }
 
-  return input.slice(0, maxLength) + suffix;
+  const trimTo = Math.max(0, maxLength - suffix.length);
+  return input.slice(0, trimTo) + suffix.slice(0, maxLength);
+}
+
+export function reverseWords(input: string): string {
+  return input.trim().split(/\s+/).reverse().join(" ");
+}
+
+export function capitalizeWords(input: string): string {
+  return input.replace(/\S+/g, (word) => word[0].toUpperCase() + word.slice(1).toLowerCase());
 }
 
 export function parseTags(input: string): string[] {
