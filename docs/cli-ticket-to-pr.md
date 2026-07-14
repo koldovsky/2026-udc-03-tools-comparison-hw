@@ -30,7 +30,7 @@ materials/task-feature-ticket.md
 
 ## PR
 
-
+Посилання: https://github.com/tatiana-lapteva/2026-udc-03-tools-comparison-hw/pull/1
 
 Короткий diff-summary: 2 файли змінено, +31/-1 рядків
 (`app/src/text-utils.ts`, `app/src/text-utils.test.ts`), коміт `af32c46`
