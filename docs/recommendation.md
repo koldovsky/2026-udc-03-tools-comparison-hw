@@ -10,7 +10,7 @@
 
 **Claude Code (CLI)** — для сценаріїв: headless/CI pipelines, batch refactors, «тікет → PR» без IDE, робота на remote/devcontainer.
 
-Чому: та сама якість на BUG-101, але terminal-native. Task E показав, що CLI зручний для repeatable agent flows; гірший для швидкого visual review diff.
+Чому: та сама якість на BUG-101, але terminal-native. Task E bonus показав terminal workflow в Cursor Agent (не окремий запуск Claude Code CLI); гірший для швидкого visual review diff.
 
 **GitHub Copilot** — tertiary для щоденних inline completions (дешевше, Pro $10), але не primary для multi-file agent tasks.
 
@@ -23,4 +23,4 @@
 
 ## Ризик/застереження, за яким варто стежити
 
-**Vendor lock-in через tool-specific rules/commands** (`.cursor/commands`, Copilot instructions, `.claude/commands`) — AGENTS.md портable, але «продвинуті» workflows прив'язують команду до одного vendor. Варто тримати core conventions у `AGENTS.md`, а tool-specific — thin wrappers.
+**Vendor lock-in через tool-specific rules/commands** (`.cursor/commands`, Copilot instructions, `.claude/commands`) — AGENTS.md portable, але «просунуті» workflows прив'язують команду до одного vendor. Варто тримати core conventions у `AGENTS.md`, а tool-specific — thin wrappers.

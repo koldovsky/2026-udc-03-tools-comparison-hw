@@ -40,6 +40,7 @@ describe("truncate", () => {
 
   it("returns suffix truncated when suffix is longer than maxLength", () => {
     expect(truncate("hello world", 2, "...")).toBe("..");
+    expect(truncate("hello world", 3, "...")).toBe("...");
   });
 });
 

@@ -2,16 +2,24 @@
 
 Інструменти, що порівнюються: **Cursor**, **GitHub Copilot (VS Code)**, **Claude Code (CLI)**
 
+> **As of:** 2026-07-14. Рядки з цінами/політиками — **vendor claims** (офіційні джерела нижче). Рядки про UX/autonomy — **власні спостереження** з Task B.
+
 | Критерій | Cursor | GitHub Copilot | Claude Code |
 |---|---|---|---|
-| Вибір/якість моделі | Composer 2.x, GPT-5.x, Claude Sonnet/Opus — перемикається в IDE | GPT-4.1 / GPT-5 mini (Copilot Pro); обмежений вибір у free tier | Claude Sonnet 4.6 / Opus 4.8; модель задається в CLI |
-| Агентна автономність та multi-step execution | Agent mode: багатокрокові зміни, термінал, MCP, subagents | Copilot Edits / agent mode (обмеженіший scope, менше автономії) | Повний repo context, bash, git, багатокрокові сесії з `--continue` |
-| Іndексація кодової бази | @file / @folder, codebase search, `.cursorignore` | Workspace index у VS Code; `@workspace` | Читає файли через tools; немає окремого UI-індексу |
-| Підтримка rules / commands / skills / MCP | `.cursor/rules`, `.cursor/commands`, skills, MCP servers | Copilot instructions (`.github/copilot-instructions.md`), обмежені custom instructions | `CLAUDE.md`, `.claude/commands`, MCP через config |
-| Ціна та ліміти | Pro ~$20/міс; usage-based на premium models | Pro ~$10/міс; free tier — 2000 completions/міс | Pro ~$20/міс (Max); CLI ліміти за tier |
-| Enterprise-функції (SSO/SOC2/data residency) | Business: SSO, privacy mode, zero retention опції | Enterprise: SSO, policy, IP indemnity | Team/Enterprise: SSO, audit, data controls |
-| Приватність / політика навчання на даних | Privacy Mode — no train on code (Business) | Enterprise no-train; standard — aggregated telemetry | Anthropic API/Claude for Work — no train on inputs (commercial) |
+| Вибір/якість моделі | Composer 2.x, GPT-5.x, Claude Sonnet/Opus — перемикається в IDE *(vendor)* | GPT-4.1 / GPT-5 mini (Copilot Pro); обмежений вибір у free tier *(vendor)* | Claude Sonnet 4.6 / Opus 4.8; модель задається в CLI *(vendor)* |
+| Агентна автономність та multi-step execution | Agent mode: багатокрокові зміни, термінал, MCP, subagents *(спостереження)* | Copilot Edits / agent mode (обмеженіший scope) *(спостереження)* | Repo context, bash, git, `--continue` *(спостереження)* |
+| Іndekсація кодової бази | @file / @folder, codebase search, `.cursorignore` *(спостереження)* | Workspace index; `@workspace` *(спостереження)* | Читає файли через tools *(спостереження)* |
+| Підтримка rules / commands / skills / MCP | `.cursor/rules`, `.cursor/commands`, skills, MCP *(vendor + спостереження)* | `.github/copilot-instructions.md` *(vendor)* | `CLAUDE.md`, `.claude/commands`, MCP *(vendor)* |
+| Ціна та ліміти | Pro ~$20/міс *(vendor: cursor.com/pricing)* | Pro ~$10/міс; free tier 2000 completions *(vendor: github.com/features/copilot/plans)* | Pro/Max ~$20/міс *(vendor: claude.com/pricing)* |
+| Enterprise-функції | Business: SSO, Privacy Mode *(vendor: cursor.com/docs/enterprise)* | Enterprise: SSO, DPA *(vendor: docs.github.com/copilot)* | Team/Enterprise: SSO, audit *(vendor: code.claude.com/docs)* |
+| Приватність / навчання | Privacy Mode — no train on code (Business) *(vendor)* | Enterprise no-train; Individual may opt out *(vendor)* | Commercial — no train on inputs unless opted in *(vendor)* |
+
+### Офіційні джерела
+
+- Cursor: [pricing](https://cursor.com/pricing), [privacy](https://cursor.com/docs/enterprise/privacy-and-data-governance)
+- GitHub Copilot: [plans](https://github.com/features/copilot/plans), [data policies](https://docs.github.com/en/copilot)
+- Claude: [pricing](https://claude.com/pricing), [data usage](https://code.claude.com/docs/en/data-usage)
 
 ## Висновок
 
-Найбільші відмінності — **автономність** (Cursor/Claude Code >> Copilot inline) та **екосистема rules/commands** (Cursor найбагатший UI, Claude Code — найкращий для headless/CI). Copilot виграє на **ціні** та **швидких inline-доповненнях**, але програє на multi-file agent tasks. Для homework-style bug fix Cursor дав найшвидший цикл «тікет → тест → фікс» без ручного copy-paste між файлами.
+Найбільші відмінності — **автономність** (Cursor/Claude Code >> Copilot inline) та **екосистема rules/commands**. Copilot виграє на **ціні** та inline-доповненнях. Для BUG-101 (Task B) Cursor дав найшвидший цикл «тікет → тест → фікс».

@@ -13,6 +13,7 @@ Cross-tool baseline for this tiny TypeScript sample (WS3 tool-comparison target)
 |---------|---------|
 | `npm test` | Run vitest once |
 | `npm run test:watch` | Watch mode |
+| `npm run build` | **n/a** — build-скрипт відсутній у `app/package.json` |
 
 ## Conventions
 

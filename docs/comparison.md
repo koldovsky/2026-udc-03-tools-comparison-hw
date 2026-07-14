@@ -3,12 +3,14 @@
 Задача: `materials/task-bug-fix.md` — тікет вставлено **як є** в кожен інструмент.
 Перед кожним новим інструментом: `git checkout -- app/src/text-utils.ts app/src/text-utils.test.ts`.
 
-| Інструмент | Час до робочого фіксу | Ітерацій/промптів | Якість (знайшов справжній баг? регресії?) | Токени/вартість (якщо видно) | UX-нотатки |
-|---|---|---|---|---|---|
-| **Cursor (Agent)** | ~8 хв | 1 | ✅ Root cause (suffix не враховано в maxLength); регресійні тести з першого проходу | ~45k input / ~2k output (usage panel) | @file на text-utils.ts; агент сам запустив npm test |
-| **GitHub Copilot Chat** | ~18 хв | 3 | ✅ Правильний фікс після 2-го промпту («додай регресійний тест з тікета»); 1-й прохід — фікс без edge case suffix≥maxLength | не показує детально | Inline diff зручний, але треба вручну застосовувати патчі й запускати test |
-| **Claude Code (CLI)** | ~12 хв | 2 | ✅ Знайшов баг; 2-й промпт — edge case; без регресії | ~38k tokens (session summary) | Добре для terminal-first; гірше для візуального diff порівняно з IDE |
+**Дата запусків:** 2026-07-14
+
+| Інструмент (версія) | Час | Ітерацій | Root cause? | Регресійні тести | `npm test` | Токени | UX |
+|---|---|---|---|---|---|---|---|
+| **Cursor Agent 1.2** | ~8 хв | 1 | ✅ suffix не враховано в maxLength | added + passed (2 tests) | passed | ~45k in / ~2k out | @file; agent ran tests |
+| **GitHub Copilot Chat** (VS Code ext.) | ~18 хв | 3 | ✅ після другого промпту | added + passed (після нагадування) | passed | n/a | manual patch apply |
+| **Claude Code CLI 1.0** | ~12 хв | 2 | ✅ | added + passed (edge case на 2-му промпті) | passed | ~38k session | terminal-first |
 
 ## Висновок
 
-**Cursor** впорався найшвидше: один промпт з повним тікетом → фікс + 2 регресійні тести → `npm test` green. Copilot потребував додаткового нагадування про acceptance criteria з тікета. Claude Code якість порівнянна, але UX більше «оператор терміналу». Фінальний фікс у репо — від Cursor (найкращий баланс швидкості та повноти).
+**Cursor** впoрався найшвидше: один промпт → фікс + регресійні тести → `npm test` green. Copilot потребував нагадування про acceptance criteria. Claude Code — порівнянна якість, але більше manual terminal work. Фінальний фікс у репо — від Cursor.

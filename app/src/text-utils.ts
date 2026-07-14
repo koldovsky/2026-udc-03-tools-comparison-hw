@@ -13,6 +13,7 @@ export function truncate(input: string, maxLength: number, suffix = "..."): stri
     return input;
   }
 
+  // Edge case: якщо сам суфікс не влазить у ліміт, повертаємо його обрізану версію
   if (suffix.length >= maxLength) {
     return suffix.slice(0, maxLength);
   }

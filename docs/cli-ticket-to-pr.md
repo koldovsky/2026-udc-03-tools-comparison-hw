@@ -8,7 +8,7 @@ Claude Code (CLI) — симульовано через Cursor Agent з terminal
 
 ## Команда, яку запустили
 
-```
+```bash
 # Еквівалент для Claude Code:
 claude -p "Implement materials/task-feature-ticket.md in app/src/text-utils.ts with tests. Run npm test."
 
