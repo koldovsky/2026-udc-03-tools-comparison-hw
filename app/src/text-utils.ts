@@ -13,7 +13,24 @@ export function truncate(input: string, maxLength: number, suffix = "..."): stri
     return input;
   }
 
-  return input.slice(0, maxLength) + suffix;
+  if (suffix.length >= maxLength) {
+    return suffix.slice(0, maxLength);
+  }
+
+  return input.slice(0, maxLength - suffix.length) + suffix;
+}
+
+export function capitalizeWords(input: string): string {
+  // Split on whitespace while keeping the separators, so the original
+  // spacing (count, position, leading/trailing) is preserved verbatim.
+  return input
+    .split(/(\s+)/)
+    .map((token) =>
+      /\s/.test(token)
+        ? token
+        : token.charAt(0).toUpperCase() + token.slice(1).toLowerCase(),
+    )
+    .join("");
 }
 
 export function parseTags(input: string): string[] {
