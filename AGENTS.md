@@ -1,6 +1,6 @@
 # AGENTS.md
 
-Baseline guidance for an Agentic IDE working in **this homework repo**.
+Baseline guidance for any Agentic Tool working in **this homework repo**.
 
 > UDC Workshop 3 homework — AI tools comparison. Participants run the same
 > ticket across 2-3 tools, build a capability matrix, generalize
@@ -22,9 +22,27 @@ Baseline guidance for an Agentic IDE working in **this homework repo**.
 - The homework is graded by CodeRabbit (`.coderabbit.yaml`) against the
   Definition of Done in `docs/walkthrough.md`.
 
-## Conventions
 
-- Documentation language: Ukrainian or English (participant's choice).
+## Stack
+
+- **Runtime:** Node.js (see `.nvmrc` or `package.json` for version)
+- **Language:** TypeScript (strict mode)
+- **Test framework:** Vitest
+- **Lint:** не налаштовано
+
+
+## Commands
+
+```bash
+cd app
+npm install       # встановити залежності (один раз)
+npm test          # запустити тести (vitest)
+npm run build     # tsc — компіляція (якщо потрібна перевірка типів)
+# lint: не налаштовано — не вигадуй команду
+```
+
+## Outputs
+
 - Keep generated artifacts in the agreed paths so auto-review can find them:
   - `docs/tool-matrix.md` — Task A capability matrix
   - `docs/comparison.md` — Task B same-ticket comparison across ≥2 tools
@@ -32,6 +50,11 @@ Baseline guidance for an Agentic IDE working in **this homework repo**.
   - `docs/recommendation.md` — Task D team recommendation
   - `docs/cli-ticket-to-pr.md` — Task E (bonus)
   - `app/AGENTS.md` — generalized in place (Task C)
+
+## Conventions
+- One conceptual change per commit. Bug fix and its regression test go in one PR; a new feature goes in a separate one.
+- Documentation language: Ukrainian or English (participant's choice).
+
 
 ## Guardrails
 
@@ -44,8 +67,10 @@ Baseline guidance for an Agentic IDE working in **this homework repo**.
 - **Windows + Git Bash:** never use `2>nul` / `>nul` (creates a literal `nul`
   file). Use `2>/dev/null` / `>/dev/null`. `nul` is gitignored as a net.
 
-## How to verify
+
+## Definition of Done
 
 Before opening a PR: `cd app && npm test` is green, and the Task files listed
 above exist with real, specific content (not placeholders) for at least the
 core Tasks A–D.
+
