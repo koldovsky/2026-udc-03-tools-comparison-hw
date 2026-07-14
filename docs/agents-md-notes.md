@@ -12,9 +12,9 @@
 
 | Інструмент | Чи описав/підхопив `AGENTS.md`? | Нотатки |
 |---|---|---|
-| **Cursor 1.2** (2026-07-14) | Так (read-only) | Описав stack, commands, conventions, guardrails з файлу; не згадав eslint |
-| **GitHub Copilot Chat** (VS Code, 2026-07-14) | Частково | Без `@AGENTS.md` — запропонував eslint; з `@AGENTS.md` — коректно перелічив conventions |
-| **Claude Code 1.0** (2026-07-14) | Так (read-only) | Послався на `AGENTS.md`, описав functional style і module layout |
+| **Cursor 1.2** (2026-07-14) | Так (read-only) | Інструмент описав правила з `AGENTS.md`; не згадав eslint |
+| **GitHub Copilot Chat** (VS Code, 2026-07-14) | Частково | Без `@AGENTS.md` — запропонував eslint; з `@AGENTS.md` — інструмент описав правила |
+| **Claude Code 1.0** (2026-07-14) | Так (read-only) | Інструмент описав правила з `AGENTS.md` (functional style, module layout) |
 
 ## Промпт верифікації
 
@@ -34,10 +34,10 @@ Implementation prompt (заплановано, не виконувався до 
 
 ## Результат
 
-- **Cursor:** read-only відповідь — перелічив stack, commands, 5 conventions, guardrails; не згадав eslint ✅
-- **Copilot (без @AGENTS.md):** запропонував prettier/eslint — guardrail не підхоплено ❌
-- **Copilot (з @AGENTS.md):** коректно описав conventions з файлу ✅
-- **Claude Code:** read-only відповідь — послався на AGENTS.md, описав conventions ✅
+- **Cursor:** read-only — інструмент описав правила (stack, commands, conventions, guardrails); не згадав eslint ✅
+- **Copilot (без @AGENTS.md):** запропонував prettier/eslint — правила не описані з файлу ❌
+- **Copilot (з @AGENTS.md):** інструмент описав правила з файлу ✅
+- **Claude Code:** read-only — інструмент описав правила з AGENTS.md ✅
 
 > Примітка: це **опис правил** (read-only), не артефакт code execution. Для повної верифікації implementation prompt потрібен окремий diff + `npm test` output.
 
