@@ -31,4 +31,29 @@ describe("truncate", () => {
     expect(result.length).toBeLessThan("hello world".length);
     expect(result.endsWith("...")).toBe(true);
   });
+
+  it("respects maxLength including the suffix", () => {
+    const result = truncate("a long sentence here", 10, "...");
+    expect(result).toBe("a long ...");
+    expect(result.length).toBeLessThanOrEqual(10);
+  });
+
+  it("handles edge case when suffix length >= maxLength", () => {
+    const result = truncate("hello world", 2, "...");
+    expect(result.length).toBeLessThanOrEqual(2);
+  });
+
+  it("never returns a string longer than maxLength", () => {
+    const testCases = [
+      { text: "a long sentence here", maxLength: 10, suffix: "..." },
+      { text: "hello world", maxLength: 8, suffix: "!" },
+      { text: "test", maxLength: 5, suffix: ".." },
+      { text: "abc", maxLength: 3, suffix: "..." },
+    ];
+
+    testCases.forEach(({ text, maxLength, suffix }) => {
+      const result = truncate(text, maxLength, suffix);
+      expect(result.length).toBeLessThanOrEqual(maxLength);
+    });
+  });
 });
