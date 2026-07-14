@@ -49,6 +49,9 @@ describe("truncate", () => {
       { text: "hello world", maxLength: 8, suffix: "!" },
       { text: "test", maxLength: 5, suffix: ".." },
       { text: "abc", maxLength: 3, suffix: "..." },
+      { text: "empty test", maxLength: 0, suffix: "..." },
+      { text: "negative test", maxLength: -5, suffix: "..." },
+      { text: "", maxLength: 5, suffix: "..." },
     ];
 
     testCases.forEach(({ text, maxLength, suffix }) => {
