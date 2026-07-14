@@ -13,7 +13,17 @@ export function truncate(input: string, maxLength: number, suffix = "..."): stri
     return input;
   }
 
-  return input.slice(0, maxLength) + suffix;
+  if (suffix.length >= maxLength) {
+    return suffix.slice(0, maxLength);
+  }
+
+  const bodyLength = maxLength - suffix.length;
+  return input.slice(0, bodyLength) + suffix;
+}
+
+/** Capitalize the first letter of each word; preserve whitespace layout. */
+export function capitalizeWords(input: string): string {
+  return input.replace(/\S+/g, (word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase());
 }
 
 export function parseTags(input: string): string[] {
