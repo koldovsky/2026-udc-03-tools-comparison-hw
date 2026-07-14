@@ -13,6 +13,8 @@ export function truncate(input: string, maxLength: number, suffix = "..."): stri
     return input;
   }
 
+export function truncate(input: string, maxLength: number, suffix = "..."): string {
+  if (maxLength <= 0) return "";
   const availableLength = maxLength - suffix.length;
   if (availableLength <= 0) {
     return suffix.slice(0, maxLength);
