@@ -21,9 +21,8 @@ Shared context for any AI coding assistant working on this TypeScript text utili
 - Keep implementations small, readable, and typed; prefer straightforward pure functions for utilities.
 - Follow the existing style in `src/text-utils.ts`: named exports, no classes, no unnecessary abstractions.
 - Preserve public function signatures unless the task explicitly asks for an API change.
-- Add or update Vitest coverage for behavior changes, especially regression cases.
+- Add or update Vitest coverage for behavior changes, especially regression cases. Use generic test strings and examples that document utility behavior clearly.
 - Avoid new dependencies unless they are clearly needed for the requested task.
-- Use generic test strings and examples that document utility behavior clearly.
 
 ## Guardrails
 
