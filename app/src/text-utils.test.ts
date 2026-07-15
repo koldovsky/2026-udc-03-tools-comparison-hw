@@ -31,4 +31,16 @@ describe("truncate", () => {
     expect(result.length).toBeLessThan("hello world".length);
     expect(result.endsWith("...")).toBe(true);
   });
+
+  it("counts the suffix within maxLength", () => {
+    const result = truncate("a long sentence here", 10, "...");
+
+    expect(result).toBe("a long ...");
+    expect(result.length).toBeLessThanOrEqual(10);
+  });
+
+  it("truncates the suffix when it is at least maxLength", () => {
+    expect(truncate("hello world", 3, ".....")).toBe("...");
+    expect(truncate("hello world", 0, "...")).toBe("");
+  });
 });
