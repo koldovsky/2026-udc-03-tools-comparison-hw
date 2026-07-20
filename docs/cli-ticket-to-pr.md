@@ -14,7 +14,13 @@ opencode (режим build) — прочитати тікет materials/task-fea
 
 ## Що реалізовано
 
-`capitalizeWords(input: string): string` додано в `app/src/text-utils.ts` — реалізація на `replace(/\S+/g, ...)` яка зберігає всі пробіли (множинні, початкові, кінцеві) без змін. 6 unit-тестів додано в `app/src/text-utils.test.ts` (усі приклади з тікета + edge cases). Наявні 9 тестів не змінені, загалом 14/14 зелених.
+`capitalizeWords(input: string): string` додано в `app/src/text-utils.ts` — реалізація на `replace(/\S+/g, ...)` яка зберігає всі пробіли (множинні, початкові, кінцеві) без змін. Набір тестів на момент Task E (snapshot OpenCode):
+
+- **Базовий suite після Task B у репо:** 8 тестів (`slugify`×2, `parseTags`×2, `truncate`×4 — включно з 2 регресійними BUG-101).
+- **Додано для FEAT-102:** 7 тестів у `describe("capitalizeWords")` (5 прикладів з тікета + порожній рядок + лише пробіли + односимвольні слова).
+- **Підсумок:** 8 + 7 = **15/15** зелених (`npm test`).
+
+> Поточний фінальний suite репо також **15/15**; числа 8/8 і 9/9 у `docs/comparison.md` — окремі snapshot-и Task B, не змішувати з Task E.
 
 ## PR
 

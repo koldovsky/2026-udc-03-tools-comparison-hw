@@ -68,4 +68,8 @@ describe("capitalizeWords", () => {
   it("handles already title-cased input", () => {
     expect(capitalizeWords("already Title Case")).toBe("Already Title Case");
   });
+
+  it("capitalizes single-character words correctly", () => {
+    expect(capitalizeWords("i am a hero")).toBe("I Am A Hero");
+  });
 });

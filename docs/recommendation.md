@@ -86,8 +86,10 @@ BYOK», де Cursor слабший або дорожчий.
 запитів/міс на Pro), неочікуваний on-demand overage після вичерпання ліміту.
 
 **Що зробити зараз:** увімкнути spend limit у налаштуваннях команди; для
-рутинних задач — Auto mode (не списує API credits); для CI/дешевих задач —
-secondary OpenCode (BYOK або Go $10/міс), щоб не роздувати Cursor bill.
+рутинних задач — Auto mode (маршрутизує на first-party/included usage pool, окремий
+від $20 API pool; після вичерпання included-ліміту можливий on-demand billing);
+для CI/дешевих задач — secondary OpenCode (BYOK або Go $10/міс), щоб не
+роздувати Cursor bill.
 
 ## Підсумок для команди
 
